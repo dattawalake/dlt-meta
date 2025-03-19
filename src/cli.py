@@ -233,7 +233,9 @@ class DLTMeta:
             "launched with run_id={}, Please check the job status in databricks workspace jobs tab"
         ).format(created_job.job_id, run.run_id)
         logger.info(msg)
+        print(f"Job created successfully. job_id={created_job.job_id}, url={self._ws.config.host}/jobs/{created_job.job_id}?o={self._ws.get_workspace_id()}")
         webbrowser.open(f"{self._ws.config.host}/jobs/{created_job.job_id}?o={self._ws.get_workspace_id()}")
+
 
     def create_uc_schema(self, uc_catalog_name, dlt_meta_schema):
         try:
@@ -412,6 +414,7 @@ class DLTMeta:
             "Please check the pipeline status in databricks workspace under workflows -> Delta Live Tables tab"
         )
         logger.info(msg)
+        print(f"dlt-meta pipeline={pipeline_id} created and launched with update_id={update_response.update_id}, url={self._ws.config.host}/#joblist/pipelines/{pipeline_id}?o={self._ws.get_workspace_id()}/")
         webbrowser.open(f"{self._ws.config.host}/#joblist/pipelines/{pipeline_id}?o={self._ws.get_workspace_id()}/")
 
     def _load_onboard_config(self) -> OnboardCommand:
